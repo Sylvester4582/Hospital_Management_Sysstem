@@ -2,6 +2,7 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/errorMiddleware.js";
 import { User } from "../models/userSchema.js";
 import { generateToken } from "../utilities/jwtToken.js"
+import cloudinary from "cloudinary"
 
 // -----PATIENT REGISTER-----
 
@@ -11,28 +12,26 @@ export const patientRegister = catchAsyncErrors(async(req, res, next) => {
         lastName, 
         email, 
         phone, 
-        nic, 
         dob, 
         gender, 
         password,
         confirmPassword,
     } = req.body;
-    if(!firstName ||  !lastName || !email || !phone || !nic || !dob || !gender || !password || !confirmPassword){
+    if(!firstName ||  !lastName || !email || !phone || !dob || !gender || !password || !confirmPassword){
         return next(new ErrorHandler("Please fill in all fields", 400));
     }
-    let user = await User.findOne({email});
-    if(user){
-        return next(new ErrorHandler("Email already in use", 400));
+    const isRegistered = await User.findOne({email});
+    if(isRegistered){
+        return next(new ErrorHandler(`Email is already registered as ${isRegistered.role}!`, 400));
     }
     if(password !== confirmPassword){
         return next(new ErrorHandler("Passwords Do Not match"), 400);
     }
-    user = await User.create({
+    const user = await User.create({
         firstName, 
         lastName, 
         email, 
         phone, 
-        nic, 
         dob, 
         gender, 
         password,
@@ -75,27 +74,25 @@ export const addNewAdmin = catchAsyncErrors(async(req, res, next) => {
         lastName, 
         email, 
         phone, 
-        nic, 
         dob, 
         gender, 
         password,
         confirmPassword,
     } = req.body;
 
-    if(!firstName ||  !lastName || !email || !phone || !nic || !dob || !gender || !password || !confirmPassword){
+    if(!firstName ||  !lastName || !email || !phone || !dob || !gender || !password || !confirmPassword){
         return next(new ErrorHandler("Please fill in all fields", 400));
     }
 
     const isRegistered = await User.findOne({email});
     if(isRegistered){
-        return next(new ErrorHandler("Email is already registered", 400));
+        return next(new ErrorHandler(`Email is already registered as ${isRegistered.role}!`, 400));
     }
     const user = await User.create({
         firstName, 
         lastName, 
         email, 
         phone, 
-        nic, 
         dob, 
         gender, 
         password,
@@ -164,11 +161,53 @@ export const addNewDoctor = catchAsyncErrors(async(req, res, next) => {
         lastName, 
         email, 
         phone, 
-        nic, 
         dob, 
         gender, 
         password,
         confirmPassword,
         doctorDepartment,
     } = req.body;
+    if(!firstName ||  !lastName || !email || !phone || !dob || !gender || !password || !confirmPassword || !doctorDepartment){
+        return next(new ErrorHandler("Please fill in all fields", 400));
+    }
+
+    const isRegistered = await User.findOne({email});
+    if(isRegistered){
+        return next(new ErrorHandler(`Email is already registered as ${isRegistered.role}!`, 400));
+    }
+
+    if(password !== confirmPassword){
+        return next(new ErrorHandler("Passwords do not match", 400));
+    }
+
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+        docAvtar.tempFilePath, 
+    )
+    if(!cloudinaryResponse || cloudinaryResponse.error){
+        console.error(
+            "Cloudinary Error:",
+            cloudinaryResponse.error || "Unknown error uploading image to Cloudinary"
+        );
+    }
+
+    const doctor = await User.create({
+        firstName, 
+        lastName, 
+        email, 
+        phone, 
+        dob, 
+        gender, 
+        password,
+        doctorDepartment,
+        role: "Doctor",
+        docAvatar: {
+            public_id: cloudinaryResponse.public_id,
+            url: cloudinaryResponse.secure_url,
+        },
+    });
+    res.status(200).json({
+        success: true,
+        message: "New Doctor registered successfully!",
+        doctor,
+    });
 });

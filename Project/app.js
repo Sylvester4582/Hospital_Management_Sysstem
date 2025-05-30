@@ -19,18 +19,19 @@ app.use(
     })
 );
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use("/api/v1/message", messageRouter);
-app.use("/api/v1/user", userRouter);
-
 app.use(
     fileUpload({
     useTempFiles: true,
     tempFileDir: '/tmp/',
     })
 );
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use("/api/v1/message", messageRouter);
+app.use("/api/v1/user", userRouter);
 
 dbConnection();
 
