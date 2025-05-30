@@ -123,3 +123,52 @@ export const getUserDetails = catchAsyncErrors(async(req, res, next) => {
         user,
     });
 });
+
+// -----LOGOUT-----
+
+export const logoutAdmin = catchAsyncErrors(async(req, res, next) => {
+    res.status(200).cookie("adminToken", "", {
+        httpOnly: true,
+        expires: new Date(Date.now())
+    }).json({
+        success: true,
+        message: "Admin Logged out successfully"
+    });
+});
+
+export const logoutPatient = catchAsyncErrors(async(req, res, next) => {
+    res.status(200).cookie("patientToken", "", {
+        httpOnly: true,
+        expires: new Date(Date.now())
+    }).json({
+        success: true,
+        message: "Patient Logged out successfully"
+    });
+});
+
+// -----ADD NEW DOCTORS-----
+
+export const addNewDoctor = catchAsyncErrors(async(req, res, next) => {
+    if(!req.files || Object.keys(req.files).length === 0) {
+        return next(new ErrorHandler("Please upload a profile picture!", 400));
+    }
+
+    const {docAvtar} = req.files;
+    const allowedFormats = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+    if(!allowedFormats.includes(docAvtar.mimetype)){
+        return next(new ErrorHandler("File format not supported!", 400));
+    }
+
+    const {
+        firstName, 
+        lastName, 
+        email, 
+        phone, 
+        nic, 
+        dob, 
+        gender, 
+        password,
+        confirmPassword,
+        doctorDepartment,
+    } = req.body;
+});
