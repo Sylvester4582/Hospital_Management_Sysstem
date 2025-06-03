@@ -1,10 +1,17 @@
 import React from 'react'
+import Hero from '../components/Hero.jsx'
+import Biography from '../components/Biography.jsx'
+import Department from '../components/Department.jsx'
+import MessageForm from '../components/MessageForm.jsx'
 
 const Home = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <Hero title={"Welcome to SilverCare Medicare Institute | Your Trusted Healthcare"} imageUrl="../../public/hero.png" />
+      <Biography />
+      <Department />
+      <MessageForm />
+    </>
   )
 }
 
