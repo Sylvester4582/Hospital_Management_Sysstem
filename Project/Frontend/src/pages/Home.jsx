@@ -7,8 +7,8 @@ import MessageForm from '../components/MessageForm.jsx'
 const Home = () => {
   return (
     <>
-      <Hero title={"Welcome to SilverCare Medicare Institute | Your Trusted Healthcare"} imageUrl="../../public/hero.png" />
-      <Biography />
+      <Hero title={"Welcome to SilverCare Medicare Institute | Your Trusted Healthcare"} imageUrl="/hero.png" />
+      <Biography imageUrl={"/public/about.png"} />
       <Department />
       <MessageForm />
     </>

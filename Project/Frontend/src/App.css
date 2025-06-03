@@ -416,6 +416,7 @@ footer .content div:last-child div svg {
 .card .depart-name {
   margin-bottom: 30px;
   background: #e5e5e5;
+  color: black;
   width: 320px;
   font-size: 24px;
   text-transform: uppercase;
