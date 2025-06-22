@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <Hero title={"Welcome to SilverCare Medicare Institute | Your Trusted Healthcare"} imageUrl="/hero.png" />
-      <Biography imageUrl={"/public/about.png"} />
+      <Biography imageUrl={"/about.png"} />
       <Department />
       <MessageForm />
     </>

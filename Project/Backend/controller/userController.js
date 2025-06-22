@@ -44,8 +44,8 @@ export const patientRegister = catchAsyncErrors(async(req, res, next) => {
 // -----LOGIN-----
 
 export const login = catchAsyncErrors(async(req, res, next) => {
-    const {email, password, role} = req.body;
-    if(!email || !password || !role){
+    const {email, password} = req.body;
+    if(!email || !password){
         return next(new ErrorHandler("Please Provide All Details!", 400));
     }
 
@@ -57,10 +57,6 @@ export const login = catchAsyncErrors(async(req, res, next) => {
     const isPasswordMatched = await user.comparePassword(password);
     if(!isPasswordMatched){
         return next(new ErrorHandler("Invalid Email or Password", 400));
-    }
-
-    if(role !== user.role){
-        return next(new ErrorHandler("You are not authorized to access this page", 400));
     }
     
     generateToken(user, "User Logged In Successfully!", 200, res);
