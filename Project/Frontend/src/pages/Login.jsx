@@ -15,10 +15,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/user/login", 
-        { email, password }, 
-        { withCredentials: true, headers: { 'Content-Type': 'application/json' } 
-      });
+        "http://localhost:4000/api/v1/user/login",
+        { email, password },
+        {
+          withCredentials: true, headers: { 'Content-Type': 'application/json' }
+        });
       toast.success(response.data.message);
       setIsAuthenticated(true);
       navigateTo("/");
@@ -38,8 +39,19 @@ const Login = () => {
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam quae quaerat dolor, porro excepturi obcaecati!</p>
 
       <form onSubmit={handleLogin}>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder='Email'
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) =>
+            setPassword(e.target.value)}
+          placeholder='Password'
+        />
 
         <div style={{
           gap: "10px",

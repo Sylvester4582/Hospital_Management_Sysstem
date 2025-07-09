@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const AmpointmentForm = () => {
     const [firstName, setFirstName] = useState("");
@@ -28,6 +28,8 @@ const AmpointmentForm = () => {
         "Dermatology",
         "ENT",
     ];
+
+    const navigateTo=useNavigate();
 
     const [doctors, setDoctors] = useState([]);
 
@@ -69,18 +71,19 @@ const AmpointmentForm = () => {
                 }
             );
             toast.success(data.message);
-            setFirstName(""),
-            setLastName(""),
-            setEmail(""),
-            setPhone(""),
-            setDob(""),
-            setGender(""),
-            setAppointmentDate(""),
-            setDepartment(""),
-            setDoctorFirstName(""),
-            setDoctorLastName(""),
-            setHasVisited(""),
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPhone("");
+            setDob("");
+            setGender("");
+            setAppointmentDate("");
+            setDepartment("");
+            setDoctorFirstName("");
+            setDoctorLastName("");
+            setHasVisited("");
             setAddress("");
+            navigateTo("/");
         } catch (error) {
             toast.error(error.response.data.message);
         }
