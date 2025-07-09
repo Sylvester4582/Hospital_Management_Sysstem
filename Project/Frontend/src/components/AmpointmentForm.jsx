@@ -34,7 +34,7 @@ const AmpointmentForm = () => {
     useEffect(() => {
         const fetchDoctors = async () => {
             const { data } = await axios.get(
-                "http://localhost:5000/api/v1/user/doctors",
+                "http://localhost:4000/api/v1/user/doctors",
                 { withCredentials: true }
             );
             setDoctors(data.doctors);
@@ -48,7 +48,7 @@ const AmpointmentForm = () => {
         try {
             const hasVisitedBool = Boolean(hasVisited);
             const { data } = await axios.post(
-                "http://localhost:5000/api/v1/appointment/post",
+                "http://localhost:4000/api/v1/appointment/post",
                 {
                     firstName,
                     lastName,
@@ -148,6 +148,7 @@ const AmpointmentForm = () => {
                                 setDoctorLastName("");
                             }}
                         >
+                            <option value="">Select Department</option>
                             {departmentsArray.map((depart, index) => {
                                 return (
                                     <option value={depart} key={index}>
