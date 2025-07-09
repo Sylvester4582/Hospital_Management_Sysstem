@@ -6,7 +6,7 @@ import Appointment from './pages/Appointment.jsx'
 import AboutUs from './pages/AboutUs.jsx'
 import Register from './pages/Register.jsx'
 import Login from './pages/Login.jsx'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
