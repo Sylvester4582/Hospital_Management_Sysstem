@@ -14,6 +14,6 @@ router.post("/doctor/addnew", isAdminAuthenticated, addNewDoctor);
 router.get("/patient/me", isPatientAuthenticated, getUserDetails);
 router.get("/patient/logout", isPatientAuthenticated, logoutPatient);
 
-router.get("/doctor", getAllDoctors);
+router.get("/doctors", getAllDoctors);
 
 export default router;
