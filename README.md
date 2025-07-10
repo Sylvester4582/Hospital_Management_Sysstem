@@ -44,8 +44,8 @@ A **MERN Stack** based web application for managing hospital appointments, user 
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/Sylvester4582/Hospital_Management_Sysstem
-cd Hospital_Management_Sysstem
+git clone https://github.com/Sylvester4582/Hospital_Management_System.git
+cd Hospital_Management_System
 
 cd Backend
 npm install
