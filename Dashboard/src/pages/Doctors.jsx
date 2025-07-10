@@ -1,0 +1,55 @@
+import React, { useContext, useEffect } from 'react'
+import { Navigate } from 'react-router-dom';
+import { Context } from '../main.jsx';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+const Doctors = () => {
+  const { isAuthenticated, doctors, setDoctors } = useContext(Context);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:4000/api/v1/user/doctors",
+          { withCredentials: true }
+        );
+        setDoctors(data.doctors);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    }
+    fetchDoctors();
+  }, []);
+
+  if(!isAuthenticated){
+    return <Navigate to={"/login"} />
+  }
+
+  return (
+    <section className="page doctors">
+      <h1>DOCTORS</h1>
+      <div className="banner">
+        {
+          doctors && doctors.length > 0 ? (doctors.map(element=>{
+            return(
+              <div className="card" key={element._id}>
+                <img src={element.docAvatar && element.docAvatar.url} alt="Doctor Avatar" />
+                <h4>{`${element.firstName} ${element.lastName}`}</h4>
+                <div className="details">
+                  <p>Email: <span>{element.email}</span></p>
+                  <p>Phone: <span>{element.phone}</span></p>
+                  <p>DOB: <span>{element.dob.substring(0,10)}</span></p>
+                  <p>Department: <span>{element.doctorDepartment}</span></p>
+                  <p>Gender: <span>{element.gender}</span></p>
+                </div>
+              </div>
+            )
+          })) : (<h1>NO REGISTERED DOCTORS FOUND</h1>)
+        }
+      </div>
+    </section>
+  )
+}
+
+export default Doctors
