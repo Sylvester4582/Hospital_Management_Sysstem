@@ -5,7 +5,14 @@ const Hero = ({title, imageUrl}) => {
     <div className='hero container'>
       <div className="banner">
       <h1>{title}</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui porro eius deleniti reprehenderit debitis earum tempore odit, inventore, saepe eveniet soluta delectus, a hic. Molestiae deleniti quidem, sit voluptatem, facilis impedit repellendus quaerat recusandae animi dolorem corporis dolorum porro provident officiis similique, eveniet est non veritatis nemo magnam possimus ad!</p>
+      <p>
+        ZeeCare Medical Institute is a state-of-the-art facility dedicated
+        to providing comprehensive healthcare services with compassion and
+        expertise. Our team of skilled professionals is committed to
+        delivering personalized care tailored to each patient's needs. At
+        ZeeCare, we prioritize your well-being, ensuring a harmonious
+        journey towards optimal health and wellness.
+      </p>
       </div>
       <div className="banner">
         <img src={imageUrl} alt="hero" className='animated-image' />
