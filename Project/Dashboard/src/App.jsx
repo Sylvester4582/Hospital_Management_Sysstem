@@ -43,6 +43,7 @@ const App = () => {
           <Route path='/messages' element={<Messages />} />
           <Route path='/doctors' element={<Doctors />} />
         </Routes>
+        <ToastContainer position='top-center'/>
       </Router>
     </>
   )

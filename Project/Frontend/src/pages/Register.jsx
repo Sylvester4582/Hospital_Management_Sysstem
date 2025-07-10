@@ -46,13 +46,13 @@ const Register = () => {
         <div>
           <input
             type="text"
-            placeholder='firstName'
+            placeholder='First Name'
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
           <input
             type="text"
-            placeholder='lastName'
+            placeholder='Last Name'
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
@@ -61,13 +61,13 @@ const Register = () => {
         <div>
           <input
             type="text"
-            placeholder='email'
+            placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="number"
-            placeholder='phone'
+            placeholder='Phone Number'
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
@@ -90,13 +90,13 @@ const Register = () => {
         <div>
           <input
             type="password"
-            placeholder='password'
+            placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
-            placeholder='confirmPassword'
+            placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />

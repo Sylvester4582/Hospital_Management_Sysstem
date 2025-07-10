@@ -44,7 +44,7 @@ export const patientRegister = catchAsyncErrors(async(req, res, next) => {
 // -----LOGIN-----
 
 export const login = catchAsyncErrors(async(req, res, next) => {
-    const {email, password} = req.body;
+    const {email, password, role} = req.body;
     if(!email || !password){
         return next(new ErrorHandler("Please Provide All Details!", 400));
     }
@@ -52,6 +52,10 @@ export const login = catchAsyncErrors(async(req, res, next) => {
     const user = await User.findOne({email}).select("+password");
     if(!user){
         return next(new ErrorHandler("Invalid Email or Password", 400));
+    }
+
+    if(user.role !== role){
+        return next(new ErrorHandler(`You are not registered as ${role}!`, 400));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
@@ -146,9 +150,9 @@ export const addNewDoctor = catchAsyncErrors(async(req, res, next) => {
         return next(new ErrorHandler("Please upload a profile picture!", 400));
     }
 
-    const {docAvtar} = req.files;
+    const {docAvatar} = req.files;
     const allowedFormats = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
-    if(!allowedFormats.includes(docAvtar.mimetype)){
+    if(!allowedFormats.includes(docAvatar.mimetype)){
         return next(new ErrorHandler("File format not supported!", 400));
     }
 
@@ -177,7 +181,7 @@ export const addNewDoctor = catchAsyncErrors(async(req, res, next) => {
     }
 
     const cloudinaryResponse = await cloudinary.uploader.upload(
-        docAvtar.tempFilePath, 
+        docAvatar.tempFilePath, 
     )
     if(!cloudinaryResponse || cloudinaryResponse.error){
         console.error(

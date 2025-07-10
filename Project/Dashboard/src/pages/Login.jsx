@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../main.jsx'
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -27,9 +27,11 @@ const Login = () => {
     }
   }
 
-  if (isAuthenticated) {
-    return navigateTo("/");
-  }
+    useEffect(() => {
+    if (isAuthenticated) {
+      navigateTo("/");
+    }
+  }, [isAuthenticated, navigateTo]);
 
   return (
      <div className='container form-component'>
