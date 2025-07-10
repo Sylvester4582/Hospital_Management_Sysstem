@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Navigate } from 'react-router-dom';
 import { Context } from '../main.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Doctors = () => {
-  const [ doctors, setDoctors ] = useState([]);
-  const { isAuthenticated } = useContext(Context);
+  const { isAuthenticated, doctors, setDoctors } = useContext(Context);
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -40,7 +39,7 @@ const Doctors = () => {
                 <div className="details">
                   <p>Email: <span>{element.email}</span></p>
                   <p>Phone: <span>{element.phone}</span></p>
-                  <p>DOB: <span>{element.dob}</span></p>
+                  <p>DOB: <span>{element.dob.substring(0,10)}</span></p>
                   <p>Department: <span>{element.doctorDepartment}</span></p>
                   <p>Gender: <span>{element.gender}</span></p>
                 </div>
