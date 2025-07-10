@@ -6,9 +6,9 @@ A **MERN Stack** based web application for managing hospital appointments, user 
 
 ## ✨ Features
 
-### 🔧 Backend (Node.js + Express + MongoDB)
+### 🔧 Backend (Node.js + Express + MongoDB Atlas)
 - RESTful API built with Express.js
-- MongoDB for data persistence
+- **MongoDB Atlas** for cloud-based data storage
 - Stores:
   - **Users** with three roles:
     - `patient`
@@ -32,3 +32,10 @@ A **MERN Stack** based web application for managing hospital appointments, user 
 - Add new **admins** and **doctors** to the system
 
 ---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js and npm
+- MongoDB Atlas account
+- React
